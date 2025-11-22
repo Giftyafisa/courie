@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: courier-web
+    runtime: node
+    buildCommand: npm ci && npm run dist
+    startCommand: node server/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
