@@ -2,7 +2,7 @@ const express = require('express');
 const api = express.Router();
 const {logger, get, post, del} = require('../lib');
 
-const AUTH = { Authorization: 'Bearer ' + process.env.TOKEN };
+const AUTH = { 'Tracking-Api-Key': process.env.TOKEN };
 const msgMap = {
 	401: 'Auth token is invalid.',
 	409: 'Parcel is already added.',
@@ -34,7 +34,7 @@ function catchError (e, res) {
 
 // get list of couriers (cache 1 day)
 api.get('/courier', (req, res) => {
-	get('/couriers/list', {}, 86400)
+	get('/couriers/list', AUTH, 86400)
 		.then(({code, data}) => res.status(code).json(data))
 		.catch(e => catchError(e, res));
 });
