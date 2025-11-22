@@ -24,14 +24,25 @@ function trackingsStore () {
 
 
 api.get('/courier').then(res => {
-	if (!res) return;
+	console.log('Courier API response:', res);
+	if (!res) {
+		console.error('No courier data received');
+		return;
+	}
+	if (!Array.isArray(res)) {
+		console.error('Courier data is not an array:', res);
+		return;
+	}
 	res.sort((a, b) => a.title.localeCompare(b.title));
 	const _couriers = {};
 	res.forEach(c => _couriers[c.slug] = c);
 	if (_couriers['an-post']) {
 		_couriers['an-post'].logo = _couriers['an-post'].logo || 'courier-anpost.png';
 	}
+	console.log('Setting couriers:', Object.keys(_couriers).length, 'couriers');
 	couriers.set(_couriers);
+}).catch(err => {
+	console.error('Error loading couriers:', err);
 });
 
 
