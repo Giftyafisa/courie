@@ -28,7 +28,9 @@ api.get('/courier').then(res => {
 	res.sort((a, b) => a.title.localeCompare(b.title));
 	const _couriers = {};
 	res.forEach(c => _couriers[c.slug] = c);
-	_couriers['an-post'].logo = _couriers['an-post'].logo || 'courier-anpost.png';
+	if (_couriers['an-post']) {
+		_couriers['an-post'].logo = _couriers['an-post'].logo || 'courier-anpost.png';
+	}
 	couriers.set(_couriers);
 });
 
