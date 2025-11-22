@@ -1,7 +1,7 @@
 const express = require('express');
 const api = express.Router();
 const {logger, get, post, del} = require('../lib');
-const couriers = require('./couriers.json');
+const couriers = require('../couriers.json');
 
 const AUTH = { 'Tracking-Api-Key': process.env.TOKEN };
 const msgMap = {
@@ -14,17 +14,18 @@ const msgMap = {
 function catchError (e, res) {
 	const code = e && e.response && e.response.status || 500;
 	let msg = msgMap[code] || (e.response && e.response.statusText) || e.message || 'Internal server error';
-	
+
 	// Log the full error for debugging
 	if (e.response && e.response.data) {
 		logger.error('API Error Response:', JSON.stringify(e.response.data, null, 2));
 	}
-	
+
 	if (e.response && e.response.data && e.response.data.meta && e.response.data.meta.message) {
 		const metaMsg = e.response.data.meta.message;
 		if (Array.isArray(metaMsg) && metaMsg.length > 0) {
 			msg += `: ${ metaMsg.join('. ') }`;
-		} else if (typeof metaMsg === 'string') {
+		}
+		else if (typeof metaMsg === 'string') {
 			msg += `: ${ metaMsg }`;
 		}
 	}
