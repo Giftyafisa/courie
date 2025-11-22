@@ -1,7 +1,7 @@
 FROM node:alpine as build
 WORKDIR /build
 COPY ./ ./
-RUN npm ci
+RUN npm install
 RUN npm run dist
 
 FROM node:alpine

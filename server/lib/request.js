@@ -5,7 +5,7 @@ const logger = require('./logger');
 
 const cachePath = path.join(__dirname, '..', 'cache');
 
-axios.defaults.baseURL = 'https://api.trackinghive.com';
+axios.defaults.baseURL = process.env.TRACKINGHIVE_API_URL || 'https://api.trackingmore.com';
 
 
 function getFname (_path) {

@@ -12,8 +12,8 @@ const msgMap = {
 
 function catchError (e, res) {
 	const code = e && e.response && e.response.status || 500;
-	let msg = msgMap[code] || e.response.statusText;
-	if (e.response.data && e.response.data.meta && e.response.data.meta.message && e.response.data.meta.message.length > 0) {
+	let msg = msgMap[code] || (e.response && e.response.statusText) || e.message || 'Internal server error';
+	if (e.response && e.response.data && e.response.data.meta && e.response.data.meta.message && e.response.data.meta.message.length > 0) {
 		msg += `: ${ e.response.data.meta.message.join('. ') }`;
 	}
 	logger.error(msg);
