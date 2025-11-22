@@ -34,16 +34,8 @@ function catchError (e, res) {
 
 // get list of couriers (cache 1 day)
 api.get('/courier', (req, res) => {
-	// Temporarily disable cache to test fresh API call
-	const useCache = req.query.nocache ? 0 : 86400;
-	get('/couriers/list', AUTH, useCache)
-		.then(({code, data}) => {
-			logger.info(`Courier response - code: ${code}, data type: ${Array.isArray(data) ? 'array' : typeof data}, length: ${Array.isArray(data) ? data.length : 'N/A'}`);
-			if (data && typeof data === 'object' && !Array.isArray(data)) {
-				logger.info('Courier data keys:', Object.keys(data));
-			}
-			res.status(code).json(data);
-		})
+	get('/carriers', AUTH, 86400)
+		.then(({code, data}) => res.status(code).json(data))
 		.catch(e => catchError(e, res));
 });
 
