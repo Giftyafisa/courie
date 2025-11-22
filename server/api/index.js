@@ -13,8 +13,19 @@ const msgMap = {
 function catchError (e, res) {
 	const code = e && e.response && e.response.status || 500;
 	let msg = msgMap[code] || (e.response && e.response.statusText) || e.message || 'Internal server error';
-	if (e.response && e.response.data && e.response.data.meta && e.response.data.meta.message && e.response.data.meta.message.length > 0) {
-		msg += `: ${ e.response.data.meta.message.join('. ') }`;
+	
+	// Log the full error for debugging
+	if (e.response && e.response.data) {
+		logger.error('API Error Response:', JSON.stringify(e.response.data, null, 2));
+	}
+	
+	if (e.response && e.response.data && e.response.data.meta && e.response.data.meta.message) {
+		const metaMsg = e.response.data.meta.message;
+		if (Array.isArray(metaMsg) && metaMsg.length > 0) {
+			msg += `: ${ metaMsg.join('. ') }`;
+		} else if (typeof metaMsg === 'string') {
+			msg += `: ${ metaMsg }`;
+		}
 	}
 	logger.error(msg);
 	res.status(code).json({ code, msg });
