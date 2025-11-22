@@ -1,6 +1,7 @@
 const express = require('express');
 const api = express.Router();
 const {logger, get, post, del} = require('../lib');
+const couriers = require('./couriers.json');
 
 const AUTH = { 'Tracking-Api-Key': process.env.TOKEN };
 const msgMap = {
@@ -32,11 +33,9 @@ function catchError (e, res) {
 }
 
 
-// get list of couriers (cache 1 day)
+// get list of couriers (static list)
 api.get('/courier', (req, res) => {
-	get('/carriers/detect', AUTH, 86400)
-		.then(({code, data}) => res.status(code).json(data))
-		.catch(e => catchError(e, res));
+	res.status(200).json(couriers);
 });
 
 

@@ -1,0 +1,22 @@
+[
+  {"slug":"ups","title":"UPS","logo":"https://trackingmore.com/images/carrier/ups.png"},
+  {"slug":"fedex","title":"FedEx","logo":"https://trackingmore.com/images/carrier/fedex.png"},
+  {"slug":"usps","title":"USPS","logo":"https://trackingmore.com/images/carrier/usps.png"},
+  {"slug":"dhl","title":"DHL","logo":"https://trackingmore.com/images/carrier/dhl.png"},
+  {"slug":"dhl-express","title":"DHL Express","logo":"https://trackingmore.com/images/carrier/dhl-express.png"},
+  {"slug":"china-post","title":"China Post","logo":"https://trackingmore.com/images/carrier/china-post.png"},
+  {"slug":"canada-post","title":"Canada Post","logo":"https://trackingmore.com/images/carrier/canada-post.png"},
+  {"slug":"australia-post","title":"Australia Post","logo":"https://trackingmore.com/images/carrier/australia-post.png"},
+  {"slug":"royal-mail","title":"Royal Mail","logo":"https://trackingmore.com/images/carrier/royal-mail.png"},
+  {"slug":"dpd","title":"DPD","logo":"https://trackingmore.com/images/carrier/dpd.png"},
+  {"slug":"an-post","title":"An Post","logo":"courier-anpost.png"},
+  {"slug":"amazon","title":"Amazon Logistics","logo":"https://trackingmore.com/images/carrier/amazon.png"},
+  {"slug":"tnt","title":"TNT","logo":"https://trackingmore.com/images/carrier/tnt.png"},
+  {"slug":"aramex","title":"Aramex","logo":"https://trackingmore.com/images/carrier/aramex.png"},
+  {"slug":"gls","title":"GLS","logo":"https://trackingmore.com/images/carrier/gls.png"},
+  {"slug":"hermes","title":"Hermes","logo":"https://trackingmore.com/images/carrier/hermes.png"},
+  {"slug":"yodel","title":"Yodel","logo":"https://trackingmore.com/images/carrier/yodel.png"},
+  {"slug":"parcelforce","title":"Parcelforce","logo":"https://trackingmore.com/images/carrier/parcelforce.png"},
+  {"slug":"chronopost","title":"Chronopost","logo":"https://trackingmore.com/images/carrier/chronopost.png"},
+  {"slug":"colissimo","title":"Colissimo","logo":"https://trackingmore.com/images/carrier/colissimo.png"}
+]
