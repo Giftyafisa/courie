@@ -24,7 +24,8 @@ function catchError (e, res) {
 // get list of couriers (cache 1 day)
 api.get('/courier', (req, res) => {
 	get('/couriers/list', {}, 86400)
-		.then(({code, data}) => res.status(code).json(data));
+		.then(({code, data}) => res.status(code).json(data))
+		.catch(e => catchError(e, res));
 });
 
 

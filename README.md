@@ -18,7 +18,7 @@ Heavily inspired by [ParcelPony](https://github.com/fireshaper/parcelpony).
 
 ## Setup
 ### Prerequisities
-- Register at [trackinghive](https://my.trackinghive.com/) and get the API token (In Settings/API Keys)
+- Register at [TrackingMore](https://admin.trackingmore.com/developer/apikey) and get the API token
 
 ### Run
 Use this `docker-compose.yml`:
@@ -34,7 +34,7 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-      - TOKEN=<trackinghive token>
+      - TOKEN=<trackingmore api key>
 
 ```
 That's it!

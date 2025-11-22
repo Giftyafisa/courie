@@ -50,8 +50,10 @@ function get (_path, headers = {}, cache_timeout_in_seconds) {
 	if (cached) return Promise.resolve(cached);
 	return axios
 		.get(_path, { headers })
-		.then(({data}) => {
-			const resp = {code: data.meta.code, data: data.data };
+		.then(({data, status}) => {
+			const apiCode = data.meta && data.meta.code;
+			const httpCode = (apiCode === 200 || apiCode === 201) ? apiCode : status;
+			const resp = {code: httpCode, data: data.data, apiCode, meta: data.meta };
 			setCache(_path, resp);
 			return resp;
 		});
@@ -61,9 +63,11 @@ function get (_path, headers = {}, cache_timeout_in_seconds) {
 function post (_path, params, headers = {}) {
 	return axios
 		.post(_path, params, { headers })
-		.then(({data}) => {
+		.then(({data, status}) => {
 			clearCache('/trackings');
-			return {code: data.meta.code, data: data.data };
+			const apiCode = data.meta && data.meta.code;
+			const httpCode = (apiCode === 200 || apiCode === 201) ? apiCode : status;
+			return {code: httpCode, data: data.data, apiCode, meta: data.meta };
 		});
 }
 
@@ -71,9 +75,11 @@ function post (_path, params, headers = {}) {
 function del (_path, headers = {}) {
 	return axios
 		.delete(_path, { headers })
-		.then(({data}) => {
+		.then(({data, status}) => {
 			clearCache('/trackings');
-			return {code: data.meta.code, data: data.data };
+			const apiCode = data.meta && data.meta.code;
+			const httpCode = (apiCode === 200 || apiCode === 201) ? apiCode : status;
+			return {code: httpCode, data: data.data, apiCode, meta: data.meta };
 		});
 }
 
