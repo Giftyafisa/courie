@@ -5,7 +5,7 @@ const logger = require('./logger');
 
 const cachePath = path.join(__dirname, '..', 'cache');
 
-axios.defaults.baseURL = process.env.TRACKINGHIVE_API_URL || 'https://api.trackingmore.com/v3';
+axios.defaults.baseURL = process.env.TRACKINGHIVE_API_URL || 'https://api.trackingmore.com/v4';
 
 
 function getFname (_path) {
@@ -51,9 +51,11 @@ function get (_path, headers = {}, cache_timeout_in_seconds) {
 	return axios
 		.get(_path, { headers })
 		.then(({data, status}) => {
+			logger.info(`Raw API response for ${_path}:`, JSON.stringify(data).substring(0, 500));
 			const apiCode = data.meta && data.meta.code;
 			const httpCode = (apiCode === 200 || apiCode === 201) ? apiCode : status;
 			const resp = {code: httpCode, data: data.data, apiCode, meta: data.meta };
+			logger.info(`Extracted data for ${_path}: ${Array.isArray(data.data) ? data.data.length + ' items' : typeof data.data}`);
 			setCache(_path, resp);
 			return resp;
 		});
