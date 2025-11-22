@@ -1,7 +1,7 @@
 FROM node:alpine as build
 WORKDIR /build
 COPY ./ ./
-RUN npm install gulp
+RUN npm ci
 RUN npm run dist
 
 FROM node:alpine
@@ -14,4 +14,5 @@ COPY --from=build /build/package-lock.json ./
 RUN npm ci --only=production
 COPY --from=build /build/public ./public
 COPY server ./server
+RUN mkdir -p logs
 CMD ["node", "server/index.js"]
